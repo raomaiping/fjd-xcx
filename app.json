@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/category/index",
+    "pages/cart/index",
+    "pages/me/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fbf9fe",
+    "navigationBarTitleText": "前端小菜鸟吖",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fbf9fe"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
