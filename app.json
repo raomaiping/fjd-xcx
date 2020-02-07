@@ -12,6 +12,36 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#fbf9fe"
   },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "tabBar": {
+    "color":"#959394",
+    "selectedColor": "#e93b3d",
+    "borderStyle":"black",
+    "backgroundColor":"#fff",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath":"image/home.png",
+        "selectedIconPath":"image/home-hl.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/index",
+        "iconPath": "image/category.png",
+        "selectedIconPath": "image/category-hl.png",        
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "iconPath": "image/cart.png",
+        "selectedIconPath": "image/cart-hl.png",       
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "iconPath": "image/me.png",
+        "selectedIconPath": "image/me-hl.png",       
+        "text": "我的"
+      }
+    ]
+  }
 }
