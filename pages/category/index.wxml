@@ -1,2 +1,13 @@
-<!--pages/category/index.wxml-->
-<text>pages/category/index.wxml</text>
+<view class="caregory">
+  <scroll-view class="nav_left" scroll-y>
+    <block wx:for="{{navLeftItems}}">
+      <view class="nav_left_items {{curIndex == index ? 'nav_left_item-active' : ''}}" data-index="{{index}}" bindtap="switchRightTab">
+      {{item}}
+      </view>
+    </block>
+  </scroll-view>
+
+  <scroll-view class="nav_right" scroll-y>
+  
+  </scroll-view>
+</view>
