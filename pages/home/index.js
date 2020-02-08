@@ -1,3 +1,6 @@
+//引入interfaces
+const interfaces = require("../../utils/urlconfing.js");
+
 // pages/home/index.js
 Page({
 
@@ -5,14 +8,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    swipers:[],
+    logos:[],
+    quicks:[],
+    pageRow:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const self = this;
 
+    wx.showLoading({
+      title: '加载中...',
+    })
+    wx.request({
+      url: interfaces.homepage,
+      header:{
+        "content-type":"application/json"// 默认值，返回的数据设置为json数据格式
+      },
+      success(res){
+        // console.log(res.data);
+        // console.log(self);
+        self.setData({
+          swipers:res.data.swipers,
+          logos:res.data.logos,
+          quicks:res.data.quicks,
+          pageRow:res.data.pageRow
+        })
+
+        wx.hideLoading();
+      }
+    })
   },
 
   /**
