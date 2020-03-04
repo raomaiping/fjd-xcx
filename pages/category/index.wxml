@@ -14,7 +14,7 @@
           <view class="title">{{item.title}}</view>
           <view class="jd-category-wrap">
             <block wx:for="{{item.desc}}" wx:for-item="list">
-              <view class="jd-category-style">
+              <view class="jd-category-style" data-txt="{{list.text}}" bindtap="showListView">
                 <image class="list_img" src="{{list.img}}"></image>
                 <text class="list_text">{{list.text}}</text>
               </view>

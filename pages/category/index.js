@@ -43,6 +43,15 @@ Page({
     this.setData({
       curIndex:index
     })
+  },
+  showListView(e){
+    // console.log(123);
+    // console.log(e.currentTarget.dataset.txt)
+    let txt = e.currentTarget.dataset.txt;
+    //导航跳转方法
+    wx.navigateTo({
+      url: '/pages/list/index?title=' + txt,
+    })
   }
  
 })
