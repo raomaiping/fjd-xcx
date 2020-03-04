@@ -1,3 +1,5 @@
+const interfaces = require("../../utils/urlconfing.js");
+
 // pages/list/index.js
 Page({
 
@@ -5,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    prolist:[]
   },
 
   /**
@@ -15,6 +17,20 @@ Page({
     // console.log(options);
     wx.setNavigationBarTitle({
       title: options.title,
+    })
+    wx.showLoading({
+      title: '加载中...'
+    })
+    const self = this;
+    wx.request({
+      url: interfaces.productionsList,
+      success(res){
+        // console.log(res.data);
+        self.setData({
+          prolist:res.data
+        })
+        wx.hideLoading();
+      }
     })
   },
 
