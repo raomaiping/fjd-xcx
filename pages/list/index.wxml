@@ -1,5 +1,5 @@
 <view class='prolist'>
-  <block wx:for='{{prolist}}'>
+  <block wx:for='{{prolist}}' wx:key="index">
     <view class='prolist_item' bindtap='switchProlistDetail' data-index='{{index}}'>
       <view class='prolist_cover'>
         <image src='{{item.cover}}'></image>
