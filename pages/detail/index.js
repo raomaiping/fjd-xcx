@@ -32,7 +32,7 @@ Page({
             result = data;
           }
         })
-        console.log(result);
+        // console.log(result);
         self.setData({
           partData:result.partData,
           baitiao:result.baitiao
