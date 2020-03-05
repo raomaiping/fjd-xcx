@@ -74,6 +74,10 @@ Page({
       partData
     })
   },
+
+  addCart(){
+    console.log("加入购物车")
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

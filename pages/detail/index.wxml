@@ -24,7 +24,17 @@
     <infocell title='已选' desc='{{partData.count}}件' bind:popView='popBuyView'></infocell>
   </view>
 
+  <view class="btn_bar">
+    <view class="icon_cart">
+      <image src="/image/cart.png"></image>
+      <text>购物车</text>
+    </view>
+    <view class="cart_btn">
+      <button bindtap="addCart">加入购物车</button>
+    </view>
+  </view>
+
   <!-- 白条弹框 -->
   <IOU baitiao='{{baitiao}}' hideBaitiao='{{hideBaitiao}}' bind:updateSelect='updateSelectItem'></IOU>
-  <buy hideBuy="{{hideBuy}}" partData="{{partData}}" bind:onGetCount="updateCount"></buy>
+  <buy hideBuy="{{hideBuy}}" partData="{{partData}}" bind:onGetCount="updateCount" bind:buyEvent="addCart"></buy>
 </view>
