@@ -1,9 +1,33 @@
 <view class='cart'>
   <view class='empty_wrap' wx:if='{{cartArray.length == 0}}'>
-      <image class='empyt_icon' src='/image/shop_cart.png'></image>
-      <text class='empyt_txt' >购物车空空如也，去逛逛吧~</text>
+    <image class='empyt_icon' src='/image/shop_cart.png'></image>
+    <text class='empyt_txt'>购物车空空如也，去逛逛吧~</text>
   </view>
   <view wx:else class='section'>
-    这里显示你加入购物车的商品信息
+    <block wx:for='{{cartArray}}' wx:key="index">
+      <view class="good_list {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtap='switchGoodsDetail' data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+        <view class='content'>
+          <view class='select_icon' catchtap='selectGood' data-index='{{index}}'>
+            <image wx:if='{{item.select}}' src='/image/selected.png'></image>
+            <image class='icon' wx:else src='/image/unselect.png'></image>
+          </view>
+          <view class='goods'>
+            <image class='good_img' src='{{item.loopImgUrl[0]}}'></image>
+            <view class='good_info'>
+              <view class='good_title'>
+                <text>{{item.title}}</text>
+              </view>
+              <view class='good_price'>
+                <text class='price'>{{item.price}}</text>
+                <!-- 商品数量 -->
+                 <amount count='{{item.total}}' data-index='{{index}}' bind:myevent="getCount" bind:subevent='subCount' bind:addevent='addCount'></amount>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 删除 -->
+        <view class='del' catchtap="del" data-index="{{index}}">删除</view>
+      </view>
+    </block>
   </view>
 </view>

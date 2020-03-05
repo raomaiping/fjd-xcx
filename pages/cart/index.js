@@ -49,12 +49,33 @@ Page({
       },
     })
   },
+  getCount(e){
+    const index = e.currentTarget.dataset.index;
+    const cartArray = this.data.cartArray;
+    cartArray[index].total = e.detail.val;
 
+    //更新data
+    this.setData({
+      cartArray
+    })
+  },
+  switchGoodsDetail(e){
+    const index = e.currentTarget.dataset.index;
+    const cartArray = this.data.cartArray;
+    wx.navigateTo({
+      url: '/pages/detail/index?id=' + cartArray[index].id,
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    //页面离开时更新storage
+    const cartArray = this.data.cartArray;
+    wx.setStorage({
+      key: 'cartInfo',
+      data: cartArray,
+    })
   },
 
   /**
