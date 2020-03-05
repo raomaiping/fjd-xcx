@@ -66,6 +66,14 @@ Page({
       baitiaoSelectItem:e.detail
     })
   },
+
+  updateCount(e){
+    let partData = this.data.partData;
+    partData.count = e.detail.val;
+    this.setData({
+      partData
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
