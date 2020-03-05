@@ -7,7 +7,10 @@ Page({
    */
   data: {
     partData:{},
-    biatiao:[]
+    biatiao:[],
+    baitiaoSelectItem:{
+      desc:"【白条支付】首单享立减优惠"
+    }
   },
 
   /**
@@ -42,6 +45,13 @@ Page({
     })
   },
 
+  popBaitiaoView(){
+    console.log("显示白条")
+  },
+
+  popBuyView() {
+    console.log("显示商品")
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
