@@ -56,6 +56,12 @@ Page({
   popBuyView() {
     // console.log("显示商品")
   },
+
+  updateSelectItem(e){
+    this.setData({
+      baitiaoSelectItem:e.detail
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

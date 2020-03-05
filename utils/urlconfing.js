@@ -1,4 +1,4 @@
-const domain = "https://enigmatic-island-47099.herokuapp.com";
+const domain = "http://fjd.raomaiping.xyz";
 
 const interfaces = {
   homepage: domain + "/api/profiles/homepage",

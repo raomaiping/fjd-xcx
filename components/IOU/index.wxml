@@ -7,7 +7,7 @@
     </view>
     <!-- 中间 -->
     <view class='pop_body'>
-      <block wx:for='{{baitiao}}'>
+      <block wx:for='{{baitiao}}' wx:key="index">
           <view class='section_item' catchtap='selectItem' data-index='{{index}}'>
             <image wx:if='{{item.select}}'  src='/image/selected.png'></image>
             <image wx:else src='/image/unselect.png'></image>
