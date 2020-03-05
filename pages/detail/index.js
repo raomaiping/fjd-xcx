@@ -12,7 +12,8 @@ Page({
       desc:"【白条支付】首单享立减优惠"
     },
     hideBaitiao:true,
-    hideBuy:true
+    hideBuy:true,
+    badgeCount:0
   },
 
   /**
@@ -107,6 +108,9 @@ Page({
             data: cartArray,
           })
         }
+
+        //商品数量
+        self.setBadge(cartArray)
       },
       fail(){
         let partData = self.data.partData;
@@ -118,12 +122,22 @@ Page({
           key: 'cartInfo',
           data: cartArray,
         })
+
+        //商品数量
+        self.setBadge(cartArray);
       }
     }),
     wx.showToast({
       title: '加入购物车成功',
       icon:"success",
       duration:3000
+    })
+  },
+
+  //商品数量方法
+  setBadge(cartArray){
+    this.setData({
+      badgeCount:cartArray.length
     })
   },
   /**
@@ -137,7 +151,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const self = this;
+    wx.getStorage({
+      key: 'cartInfo',
+      success: function(res) {
+        const cartArray = res.data;
+        self.setBadge(cartArray);
+      },
+    })
   },
 
   /**
