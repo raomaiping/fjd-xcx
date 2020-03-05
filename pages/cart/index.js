@@ -38,7 +38,10 @@ Page({
           cart.select = false; // 全不选中
         })
         self.setData({
-          cartArray
+          cartArray,
+          selectAll:false,
+          totalMoney:"0.00",
+          totalCount:0
         })
 
         //设置Tabbar图标
@@ -80,26 +83,29 @@ Page({
     let totalMoney = Number(this.data.totalMoney);
     let totalCount = this.data.totalCount;
 
+    // 选中状态
+    let selectAll = this.data.selectAll;
     //设置选中或者不选中状态
     cartArray[index].select = !cartArray[index].select;
 
     //如果选中
     if(cartArray[index].select){
-
+      console.log(11)
       totalMoney += Number(cartArray[index].price) * cartArray[index].total;
-      
       totalCount++;
     }else{
       //没有选中
       totalMoney -= Number(cartArray[index].price) * cartArray[index].total;
       totalCount--;
+      selectAll = false;
     }
 
     //更新数据
     this.setData({
       cartArray,
       totalMoney:String(totalMoney.toFixed(2)),
-      totalCount
+      totalCount,
+      selectAll
     })
   },
   /**
@@ -111,6 +117,65 @@ Page({
     wx.setStorage({
       key: 'cartInfo',
       data: cartArray,
+    })
+  },
+  subCount(e){
+    const index = e.currentTarget.dataset.index;
+    const cartArray = this.data.cartArray;
+    //合计
+    let totalMoney = Number(this.data.totalMoney);
+
+    //计算金额
+    if(cartArray[index].select){
+      totalMoney -= Number(cartArray[index].price);
+    }
+
+    //更新数据
+    this.setData({
+      totalMoney: String(totalMoney.toFixed(2))
+    })
+  },
+  addCount(e) {
+    const index = e.currentTarget.dataset.index;
+    const cartArray = this.data.cartArray;
+    //合计
+    let totalMoney = Number(this.data.totalMoney);
+
+    //计算金额
+    if (cartArray[index].select) {
+      totalMoney += Number(cartArray[index].price);
+    }
+    //更新数据
+    this.setData({
+      totalMoney: String(totalMoney.toFixed(2))
+    })
+  },
+  selectAll(){
+    const cartArray = this.data.cartArray;
+    let totalMoney = 0;
+    let totalCount = 0;
+    let selectAll = this.data.selectAll;
+
+    selectAll = !selectAll;
+    cartArray.forEach(cart =>{
+      //设置选中或不选中状态 和全选按钮是一样的状态
+      cart.select = selectAll;
+      //计算总金额和商品个数
+      if(cart.select){
+        totalMoney += Number(cart.price) * cart.total;
+        totalCount++;
+      }else{
+        totalMoney = 0;
+        totalCount = 0;
+      }
+    })
+
+    //更新数据
+    this.setData({
+      cartArray,
+      totalMoney: String(totalMoney.toFixed(2)),
+      totalCount,
+      selectAll
     })
   },
 
