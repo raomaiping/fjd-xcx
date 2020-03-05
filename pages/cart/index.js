@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    cartArray:[]
   },
 
   /**
@@ -26,7 +26,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let self = this;
+    wx.getStorage({
+      key: 'cartInfo',
+      success(res) {
+        const cartArray = res.data;
+        self.setData({
+          cartArray
+        })
 
+        //设置Tabbar图标
+        if (cartArray.length > 0){
+          wx.setTabBarBadge({
+            index: 2,
+            text: String(cartArray.length)
+          })
+        }else{
+          wx.removeTabBarBadge({
+            index: 2,
+          })
+        }
+      },
+    })
   },
 
   /**

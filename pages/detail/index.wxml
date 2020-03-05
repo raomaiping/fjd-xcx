@@ -25,7 +25,7 @@
   </view>
 
   <view class="btn_bar">
-    <view class="icon_cart">
+    <view class="icon_cart" bindtap="showCartView">
       <text class="badge" wx:if="{{badgeCount > 0}}">{{badgeCount}}</text>
       <image src="/image/cart.png"></image>
       <text>购物车</text>
