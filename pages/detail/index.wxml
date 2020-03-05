@@ -26,4 +26,5 @@
 
   <!-- 白条弹框 -->
   <IOU baitiao='{{baitiao}}' hideBaitiao='{{hideBaitiao}}' bind:updateSelect='updateSelectItem'></IOU>
+  <buy hideBuy="{{hideBuy}}" partData="{{partData}}"></buy>
 </view>
