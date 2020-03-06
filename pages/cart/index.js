@@ -193,7 +193,7 @@ Page({
       startY: e.changedTouches[0].clientY,
       cartArray:this.data.cartArray
     })
-    console.log(this.data.startX)
+    // console.log(this.data.startX)
 
   },
   touchmove(e){
@@ -207,6 +207,93 @@ Page({
     let touchMoveY = e.changedTouches[0].clientY;
 
     // console.log(touchMoveX,touchMoveY)
+    //调用计算角度方法获取角度
+    let angel = this.angel({X:startX,Y:startY},{X:touchMoveX,Y:touchMoveY});
+
+    //遍历数组中的所有对象
+    this.data.cartArray.forEach((cart,i) =>{
+      cart.isTouchMove = false;
+      //滑动的角度 > 30 直接 return
+      if(Math.abs(angel) > 30) return;
+
+      //匹配
+      if(i == index){
+        if(touchMoveX > startX){
+          //右滑
+          cart.isTouchMove = false;
+        }else{
+          //左滑
+          cart.isTouchMove = true;
+        }
+      }
+    })
+
+    //更新数据
+    this.setData({
+      cartArray:this.data.cartArray
+    })
+  },
+  angel(start,end){
+    let _X = end.X - start.X;
+    let _Y = end.Y - start.Y;
+
+    //返回角度 Math.atan() 返回数字的反正切值
+    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
+  },
+  del(e){
+    let self = this;
+    const index = e.currentTarget.dataset.index;
+    wx.getStorage({
+      key: 'cartInfo',
+      success(res) {
+        let partData = res.data;
+        partData.forEach((cart,i) =>{
+          if(cart.title == self.data.cartArray[index].title){
+            partData.splice(i,1);
+          }
+        })
+
+        //删完之后存储
+        wx.setStorage({
+          key: 'cartInfo',
+          data: partData
+        })
+
+        //更新数据
+        self.update(index);
+      },
+    })
+  },
+  update(index){
+    let cartArray = this.data.cartArray;
+    let totalMoney = Number(this.data.totalMoney);
+    let totalCount = this.data.totalCount;
+
+    //计算价格和数量
+    if(cartArray[index].select){
+      totalMoney -= Number(cartArray[index].price) * cartArray[index].total;
+      totalCount--;
+    }
+
+    //删除
+    cartArray.splice(index,1);
+
+    //更新数据
+    this.setData({
+      cartArray:this.data,cartArray,
+      totalMoney:String(totalMoney.toFixed(2)),
+      totalCount
+    })
+
+    //设置tabBar图标
+    cartArray.length > 0 ?
+    wx.setTabBarBadge({
+      index: 2,
+      text: String(cartArray.length),
+    }) :
+    wx.removeTabBarBadge({
+      index: 2,
+    })
   },
   /**
    * 生命周期函数--监听页面卸载
