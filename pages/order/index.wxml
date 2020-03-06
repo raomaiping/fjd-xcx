@@ -1,6 +1,6 @@
 <view class="order">
   <view class="sign">JD京东自营</view>
-  <block wx:for="{{accountInfo.shoppingList}}">
+  <block wx:for="{{accountInfo.shoppingList}}" wx:key="index">
     <view class="prolist_item" data-index="{{index}}">
       <view class="prolist_cover">
         <image src="{{item.loopImgUrl[0]}}"></image>
@@ -30,6 +30,6 @@
     </view> 
   </view>
   <view class="pay_btn">
-    <button>微信支付</button>
+    <button bindtap="getOpenid">微信支付</button>
   </view>
 </view>

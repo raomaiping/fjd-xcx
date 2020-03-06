@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    accountInfo:null
+    accountInfo: null
   },
 
   /**
@@ -14,7 +14,20 @@ Page({
   onLoad: function (options) {
     // console.log(options)
     this.setData({
-      accountInfo:JSON.parse(options.accountInfo)
+      accountInfo: JSON.parse(options.accountInfo)
+    })
+  },
+  getOpenid() {
+    const self = this;
+    //获取Openid
+    wx.showToast({
+      title: '支付成功',
+      icon: "success",
+      duration: 3000,
+    })
+    
+    wx.switchTab({
+      url: '/pages/me/index',
     })
   },
 
