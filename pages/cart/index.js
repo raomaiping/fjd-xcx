@@ -12,7 +12,26 @@ Page({
     startX:0,
     startY:0
   },
+  setAccount(){
+    let shoppingList = [];
 
+    this.data.cartArray.forEach(cart => {
+      if(cart.select){
+        shoppingList.push(cart)
+      }
+    })
+
+    //总价 + 商品
+    const accountInfo = {
+      shoppingList,
+      totalMoney:this.data.totalMoney
+    }
+
+    //跳转
+    wx.navigateTo({
+      url: '/pages/order/index?accountInfo=' + JSON.stringify(accountInfo)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -93,7 +112,6 @@ Page({
 
     //如果选中
     if(cartArray[index].select){
-      console.log(11)
       totalMoney += Number(cartArray[index].price) * cartArray[index].total;
       totalCount++;
     }else{
