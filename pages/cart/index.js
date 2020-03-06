@@ -8,7 +8,9 @@ Page({
     cartArray:[],
     totalMoney:"0.00", //总价
     totalCount:0, //商品个数
-    selectAll:false //是否全选
+    selectAll:false, //是否全选
+    startX:0,
+    startY:0
   },
 
   /**
@@ -36,6 +38,7 @@ Page({
         const cartArray = res.data;
         cartArray.forEach(cart =>{
           cart.select = false; // 全不选中
+          cart.isTouchMove = false; //是否滑动
         })
         self.setData({
           cartArray,
@@ -178,7 +181,33 @@ Page({
       selectAll
     })
   },
+  touchstart(e){
+    // console.log(e)
+    //开始触摸时，重置所有删除
+    this.data.cartArray.forEach(cart =>{
+      if(cart.isTouchMove) //为true的时候
+      cart.isTouchMove = false;;//其他对象都为false
+    })
+    this.setData({
+      startX:e.changedTouches[0].clientX,
+      startY: e.changedTouches[0].clientY,
+      cartArray:this.data.cartArray
+    })
+    console.log(this.data.startX)
 
+  },
+  touchmove(e){
+    let index = e.currentTarget.dataset.index;
+    //开始x 和 y 的坐标
+    let startX = this.data.startX;
+    let startY = this.data.startY;
+
+    //移动的x和y坐标
+    let touchMoveX = e.changedTouches[0].clientX;
+    let touchMoveY = e.changedTouches[0].clientY;
+
+    // console.log(touchMoveX,touchMoveY)
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
